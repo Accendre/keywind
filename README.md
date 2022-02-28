@@ -1,3 +1,15 @@
+# This is the Accendre fork of keywind. Accendre uses this repo to build Keycloak init containers.
+The container assumes a volume mount is present at `/srv/target`.
+## Build Image
+```sh
+# Tagged as latest
+docker build . -t harbor.shamrock.systems/accendre/keycloak-theme-keywind:latest
+```
+## Test Image
+```sh
+docker-compose up
+```
+
 # :wind_face: Keywind
 
 Keywind is a component-based Keycloak Login Theme built with [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss) and [Alpine.js](https://github.com/alpinejs/alpine).

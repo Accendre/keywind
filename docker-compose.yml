@@ -1,0 +1,33 @@
+version: '3'
+services:
+  keywind:
+    container_name: keywind
+    image: harbor.shamrock.systems/accendre/keycloak-theme-keywind:latest
+    volumes:
+      - ./volumes/keywind:/srv/target
+  db:
+    container_name: keycloak-db
+    image: postgres
+    restart: always
+    volumes:
+      - ./volumes/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: bn_keycloak
+      POSTGRES_PASSWORD: keycloak
+      POSTGRES_DB: bitnami_keycloak
+    ports:
+      - 5432:5432
+
+  keycloak:
+    container_name: keycloak
+    image: bitnami/keycloak:16
+    environment:
+      KEYCLOAK_DATABASE_HOST: host.docker.internal
+      KEYCLOAK_DATABASE_PASSWORD: keycloak
+    volumes:
+      - ./volumes/keywind:/opt/bitnami/keycloak/themes/keywind
+    ports:
+      - 8080:8080
+    depends_on:
+      - keywind
+      - db
