@@ -19,7 +19,7 @@ jobs:
           username: ${{ secrets.SHAMROCK_HARBOR_USERNAME }}
           password: ${{ secrets.SHAMROCK_HARBOR_SECRET }}
 
-      - name: Build and push backend
+      - name: Build and push keywind
         uses: docker/build-push-action@v2
         with:
           context: .
